@@ -5,4 +5,5 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認)
-        remember_me: パスワードを記憶
+        remember_me:
+        record_invalid: 正しく入力jしてください。

@@ -47,7 +47,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 2.0', '>= 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
@@ -58,3 +58,4 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'twitter-bootstrap-rails', '~> 4.0'
 gem 'devise-bootstrap-views', '~> 0.0.11'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
+gem 'rails-i18n', '~> 5.0', '>= 5.0.4'

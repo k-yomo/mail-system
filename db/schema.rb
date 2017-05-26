@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526040634) do
+ActiveRecord::Schema.define(version: 20170526074029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170526040634) do
     t.bigint "user_id"
     t.bigint "customer_id"
     t.integer "status", default: 0
-    t.datetime "sent_at", null: false
+    t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_gift_codes_on_customer_id"

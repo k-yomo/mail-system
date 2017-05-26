@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :customers, only: [:new, :create, :index]
   resources :users, only: [:show]
-  resources :gift_codes, only: [:index]
+  resources :gift_codes, only: [:index] do
+    collection { post :import }
+  end
 
   root to: 'welcome#index'
 
