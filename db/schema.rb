@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525200741) do
+ActiveRecord::Schema.define(version: 20170526040634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "contract_id"
+    t.datetime "applied_at"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.index ["user_id"], name: "index_customers_on_user_id"
+  end
+
+  create_table "gift_codes", force: :cascade do |t|
+    t.string "code"
+    t.bigint "user_id"
+    t.bigint "customer_id"
+    t.integer "status", default: 0
+    t.datetime "sent_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_gift_codes_on_customer_id"
+    t.index ["user_id"], name: "index_gift_codes_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +52,12 @@ ActiveRecord::Schema.define(version: 20170525200741) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "site_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "customers", "users"
+  add_foreign_key "gift_codes", "customers"
+  add_foreign_key "gift_codes", "users"
 end

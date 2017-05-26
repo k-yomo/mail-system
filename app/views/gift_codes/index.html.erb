@@ -1,0 +1,28 @@
+<h1>キャンペーンコード管理</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ステータス</th>
+    <th>ギフトコード</th>
+    <th>送信ユーザー</th>
+    <th>送信サイト</th>
+    <th>送信日時</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @gift_codes.each do |gift_code| %>
+      <tr>
+        <td><%= gift_code.status %></td>
+        <td><%= gift_code.code %></td>
+        <td><%= gift_code.customer_id %></td>
+        <td><%= gift_code.user_id %></td>
+        <td><%= gift_code.sent_at %></td>
+        <td><%= link_to 'ステータス変更', '#', class: "btn btn-primary" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>

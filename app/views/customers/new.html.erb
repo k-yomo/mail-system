@@ -1,0 +1,49 @@
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+  <% if @customer.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @customer.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+  <div class="panel panel-default devise-bs">
+    <div class="panel-heading">
+      <h4>キャンペーンお申し込み</h4>
+    </div>
+    <div class="panel-body">
+      <%= form_for(@customer) do |f| %>
+          <div class="form-group">
+            <%= f.label :name, "お名前" %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, "Eメール" %>
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :applied_at, "お申し込み日時" %>
+            <%= f.datetime_field :applied_at , class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :contract_id, "ご契約ID" %>
+            <%= f.number_field :contract_id, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :user_id, "経由メディア" %>
+            <%= f.collection_select(:user_id, User.all, :id, :site_name,
+                                    {include_blank: true},
+                                    class: "form-control"
+                )
+            %>
+          </div>
+          <%= f.submit "お申し込み", class: 'btn btn-primary' %>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-lg-2"></div>
