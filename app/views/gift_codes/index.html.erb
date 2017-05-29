@@ -1,15 +1,43 @@
 
-<%=link_to 'CSVエクスポート', gift_codes_path(format: 'csv')%>
+<div class="row well">
+  <div class="col-md-6">
+  <h2>CSVインポート</h2>
 
-<h2>CSVインポート</h2>
-
-<%= form_tag import_gift_codes_path, multipart: true do %>
-    <%= file_field_tag :csv_file %>
-    <%= submit_tag "アップロード" %>
-<% end %>
+  <%= form_tag import_gift_codes_path, multipart: true do %>
+      <%= file_field_tag :csv_file, class: "btn btn" %> <%= submit_tag "アップロード", class: "btn btn-primary" %>
+  <% end %>
+  </div>
 
 
+  <div class="col-md-6">
+    <h2>エクスポート</h2>
+    <%=link_to 'ダウンロード', gift_codes_path(format: :csv), class: "btn btn-warning" %>
+  </div>
+</div>
+
+<div class="col-md-12">
 <h2>キャンペーンコード管理</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ステータス</th>
+    <th>ギフトコード</th>
+    <th colspan="4">追加日時</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @gift_codes0.each do |gift_code| %>
+      <tr>
+        <td>未配信</td>
+        <td><%= gift_code.code %></td>
+        <td><%= gift_code.created_at %></td>
+        <td><%= link_to '使用済みにする', code_status_gift_code_path(gift_code), class: "btn btn-primary", data: { confirm: 'ステータスを変更してよろしいですか？'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
 
 <table class="table table-striped">
   <thead>
@@ -17,24 +45,26 @@
     <th>ステータス</th>
     <th>ギフトコード</th>
     <th>送信ユーザー</th>
-    <th>送信サイト</th>
+    <th>サイト</th>
     <th>送信日時</th>
-    <th colspan="3"></th>
+    <th><%= link_to '一括削除', '', class: "btn btn-danger", data: { confirm: 'ステータスを変更してよろしいですか？'} %></th>
   </tr>
   </thead>
 
   <tbody>
-  <% @gift_codes.each do |gift_code| %>
+  <% @gift_codes1.each do |gift_code| %>
       <tr>
-        <td><%= gift_code.status %></td>
+        <td>配信済</td>
         <td><%= gift_code.code %></td>
-        <td><%= gift_code.customer_id %></td>
-        <td><%= gift_code.user_id %></td>
+        <td><%= gift_code.customer.name %></td>
+        <td><%= gift_code.user.site_name %></td>
         <td><%= gift_code.sent_at %></td>
-        <td><%= link_to 'ステータス変更', '#', class: "btn btn-primary" %></td>
+        <td><%= link_to '削除', code_status_gift_code_path(gift_code), class: "btn btn-danger", data: { confirm: 'ステータスを変更してよろしいですか？'} %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
-<br>
+</div>
+
+
 

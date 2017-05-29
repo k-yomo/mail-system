@@ -2,10 +2,16 @@ require 'csv'
 class GiftCode < ActiveRecord::Base
   belongs_to :user, optional: true
   belongs_to :customer, optional: true
-
   validates :code, presence: true, uniqueness: true
 
-  #csvファイルの内容をDBに登録する
+
+  def change_status(gift_code)
+    if gift_code.status == 0
+    gift_code.update!(status: 1)
+    elsif gift_code.status == 1
+    gift_code.update!(status: 0)
+    end
+  end
 
   def self.import_by_csv(file)
     imported_num = 0
@@ -19,8 +25,6 @@ class GiftCode < ActiveRecord::Base
         #CSVの行情報をHASHに変換
         table = Hash[[row.headers, row.fields].transpose]
         code = table["code"]
-        #登録済みデータ情報
-        #登録されてなければ作成
         caches.each do |k,v|
           if  code != v
             gift_code = new(code: code)
@@ -40,4 +44,17 @@ class GiftCode < ActiveRecord::Base
     imported_num
   end
 
+  def self.to_csv
+    options = { headers: true }
+    CSV.generate(options) do |csv|
+      csv << %w{ ステータス コード ユーザー サイト 送付日時}
+      all.each do |gift_code|
+        csv << [gift_code.status,
+                gift_code.code,
+                gift_code.try(:customer).try(:name),
+                gift_code.try(:user).try(:site_name),
+                gift_code.try(:sent_at)]
+      end
+    end
+  end
 end
