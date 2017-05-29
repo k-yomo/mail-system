@@ -23,7 +23,6 @@ class GiftCodesController < ApplicationController
       redirect_to action: 'index'
     end
   end
-
   def code_status
     @gift_code = GiftCode.find(params[:id])
     @gift_code.change_status(@gift_code)
