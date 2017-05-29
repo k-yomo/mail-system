@@ -20,3 +20,4 @@
 config/secrets.yml
 .env
 config/environments/development.rb
+.idea/workspace.xml
