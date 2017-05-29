@@ -1,20 +1,20 @@
 <div class="col-lg-2"></div>
 <div class="col-lg-8">
   <% if @customer.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-          <% @customer.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+  <div id="error_explanation">
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
-      <h4>キャンペーンお申し込み</h4>
+      <h4>ユーザー情報変更</h4>
     </div>
-
-
+    
+    
     <div class="panel-body">
       <%= render 'form', customer: @customer %>
     </div>

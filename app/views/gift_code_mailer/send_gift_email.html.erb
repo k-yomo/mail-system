@@ -1,0 +1,24 @@
+<html lang="ja">
+<head>
+  <meta content="text/html; charset=UTF-8" />
+  <style type="text/css">
+    h2 {
+      color: #e7454a;
+    }
+    p hr {
+      color: #2d2a24;
+    }
+  </style>
+</head>
+<body>
+<h2><%= @customer.name %> 様</h2>
+<hr />
+<p>
+  この度は<%= @user.site_name %>を利用頂きましてありがとうございます。
+</p>
+<p>
+  Amazonギフトコード: <%= @code %><br />
+</p>
+<hr />
+</body>
+</html>

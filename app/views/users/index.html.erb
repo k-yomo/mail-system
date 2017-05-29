@@ -1,0 +1,83 @@
+<div class="row">
+<div class="col-md-6">
+  <h2>ユーザー管理</h2>
+</div>
+<div class="col-md-6">
+  <h2>CSVエクスポート</h2>
+  <p><%= link_to "ダウンロード", users_path(format: :csv), class: "btn btn-warning" %></p>
+</div>
+<hr class="col-md-12">
+</div>
+
+<div class="row well">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>本日申し込み数</th>
+      <th>今月申し込み数</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+          <td><%= @customers0.length %></td>
+          <td>30件</td>
+        </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ステータス</th>
+    <th>ユーザー</th>
+    <th>E-mail</th>
+    <th>契約日時</th>
+    <th colspan="2"><%= link_to '一括送信', send_gift_all_gift_codes_path, class: "btn btn-success" %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @customers0.each do |customer| %>
+      <tr>
+        <td>未送信</td>
+        <td><%= customer.name %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.created_at %></td>
+        <td><%= link_to '送信', send_gift_gift_code_path(customer), class: "btn" %></td>
+        <td><%= link_to '編集', edit_customer_path(customer), class: "btn btn-primary" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ステータス</th>
+    <th>ユーザー</th>
+    <th>E-mail</th>
+    <th>送付コード</th>
+    <th>送付日時</th>
+    <th><%= link_to '一括削除', '#', class: "btn btn-danger" %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @customers1.each do |customer| %>
+      <tr>
+        <td>送信済み</td>
+        <td><%= customer.name %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.gift_code.code %></td>
+        <td><%= customer.gift_code.sent_at %></td>
+        <td><%= link_to '削除', '#', class: "btn btn-danger", data: { confirm: '本当に削除してよろしいですか？'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
